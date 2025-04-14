@@ -1,0 +1,42 @@
+import alambiqueViajero.*
+
+test "luke viaja a paris"{
+    luke.viajar(paris)
+    assert.equals("Llavero de torre eiffel",luke.recuerdo())
+    assert.equals(1,luke.cuantosViajes())
+}
+
+test "luke viaja a bsas"{
+    luke.viajar(buenosAires)
+    assert.equals("Mate",luke.recuerdo())
+    assert.equals(1,luke.cuantosViajes())
+}
+
+test "luke viaja a bagdad"{
+    luke.viajar(bagdad)
+    assert.equals("bidon de petroleo",luke.recuerdo())
+    assert.equals(1,luke.cuantosViajes())
+    assert.notThat(bagdad.recuerdoTipico()=="armas masivas")
+}
+
+test "luke cambia de auto e intenta viajar a Buenos Aires"{
+    luke.vehiculo(coche1)
+    luke.viajar(buenosAires)
+    assert.equals("Mate",luke.recuerdo())
+}
+
+test "luke cambia de auto e intenta viajar a Buenos Aires pero no puede"{
+    luke.vehiculo(coche1)
+    coche1.numPersonas(7)
+    luke.viajar(buenosAires)
+    assert.notThat(buenosAires.puedeLlegar())
+}
+
+test "luke cambia de auto e intenta viajar a Buenos Aires con otra personas"{
+    luke.vehiculo(coche1)
+    coche1.numPersonas(2)
+    luke.viajar(buenosAires)
+    assert.that(buenosAires.puedeLlegar())
+    luke.viajar(paris)
+    luke.viajar(bagdad)
+}
